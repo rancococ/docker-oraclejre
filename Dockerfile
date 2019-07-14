@@ -52,9 +52,6 @@ RUN \rm -rf /etc/yum.repos.d/*.repo && \
     chown -R app:app /docker-entrypoint.sh && \
     chmod +x /docker-entrypoint.sh
 
-# user root
-USER root
-
 # set environment
 ENV LANG zh_CN.UTF-8
 ENV TZ "Asia/Shanghai"
