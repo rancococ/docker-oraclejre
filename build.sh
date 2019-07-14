@@ -53,8 +53,8 @@ registry_password=""
 
 # images
 images=(
-oraclejre:1.8.0_192-centos,registry.cn-hangzhou.aliyuncs.com/rancococ/oraclejre:1.8.0-centos
-oraclejre:1.8.0_192-centos,registry.cn-hangzhou.aliyuncs.com/rancococ/oraclejre:1.8.0_192-centos
+oraclejre:1.8.0_192-alpine,registry.cn-hangzhou.aliyuncs.com/rancococ/oraclejre:1.8.0-alpine
+oraclejre:1.8.0_192-alpine,registry.cn-hangzhou.aliyuncs.com/rancococ/oraclejre:1.8.0_192-alpine
 )
 
 # build image
@@ -79,7 +79,7 @@ docker build --rm \
              --add-host github-production-release-asset-2e65be.s3.amazonaws.com:52.216.165.147 \
              --build-arg GOSU_URL=https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64 \
              --build-arg JRE_URL=https://github.com/rancococ/serverjre/releases/download/server-jre-8/server-jre-8u192-linux-x64.tar.gz \
-             -t oraclejre:1.8.0_192-centos \
+             -t oraclejre:1.8.0_192-alpine \
              -f Dockerfile .
 }
 
