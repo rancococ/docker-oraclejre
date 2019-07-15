@@ -14,9 +14,9 @@ ARG JRE_URL=https://github.com/rancococ/serverjre/releases/download/server-jre-8
 # copy script
 COPY docker-entrypoint.sh /
 
-# install repositories and packages : curl bash openssh wget net-tools gettext zip unzip tar tzdata ncurses
+# install repositories and packages : curl bash openssh wget net-tools gettext zip unzip tar tzdata ncurses procps
 RUN echo -e "https://mirrors.huaweicloud.com/alpine/${ALPINE_VER}/main\nhttps://mirrors.huaweicloud.com/alpine/${ALPINE_VER}/community" > /etc/apk/repositories && \
-    apk update && apk add curl bash openssh wget net-tools gettext zip unzip tar tzdata ncurses && \
+    apk update && apk add curl bash openssh wget net-tools gettext zip unzip tar tzdata ncurses procps && \
     \rm -rf /var/cache/apk/* && \
     ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' && \
     ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key  -N '' && \
