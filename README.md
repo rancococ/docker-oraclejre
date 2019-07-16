@@ -4,7 +4,7 @@
 docker-oraclejre
 
 support os:
-1. alpine:curl bash openssh wget net-tools gettext zip unzip tzdata ncurses
+1. alpine:curl bash openssh wget net-tools gettext zip unzip tzdata ncurses ttf-dejavu
 2. centos:passwd openssl openssh-server wget net-tools gettext zip unzip ncurses
 
 support tool
