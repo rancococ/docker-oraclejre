@@ -14,7 +14,7 @@ ARG JRE_URL=https://github.com/rancococ/serverjre/releases/download/server-jre-8
 # copy script
 COPY docker-entrypoint.sh /
 
-# install repositories and packages : curl bash passwd openssl openssh wget net-tools gettext zip unzip ncurses
+# install repositories and packages : curl bash passwd openssl openssh wget net-tools gettext zip unzip ncurses fontconfig
 RUN \rm -rf /etc/yum.repos.d/*.repo && \
     curl -s -o /etc/yum.repos.d/centos.repo http://mirrors.aliyun.com/repo/Centos-${CENTOS_VER}.repo && \
     curl -s -o /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-${CENTOS_VER}.repo && \
@@ -27,7 +27,7 @@ RUN \rm -rf /etc/yum.repos.d/*.repo && \
     rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-${CENTOS_VER} && \
     rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${CENTOS_VER} && \
     sed -i 's@override_install_langs=en_US.utf8@#override_install_langs=en_US.utf8@g' "/etc/yum.conf" && \
-    yum install -y passwd openssl openssh-server wget net-tools gettext zip unzip ncurses && \
+    yum install -y passwd openssl openssh-server wget net-tools gettext zip unzip ncurses fontconfig && \
     yum reinstall -y glibc-common && \
     yum clean all && \rm -rf /var/lib/{cache,log} /var/log/lastlog && \
     ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N '' && \
@@ -36,9 +36,9 @@ RUN \rm -rf /etc/yum.repos.d/*.repo && \
     sed -i 's/#UseDNS.*/UseDNS no/g' /etc/ssh/sshd_config && \
     sed -i '/^session\s\+required\s\+pam_loginuid.so/s/^/#/' /etc/pam.d/sshd && \
     echo "Asia/Shanghai" > /etc/timezone && \ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-    mkdir -p /root/.ssh && chown root.root /root && chmod 700 /root/.ssh && echo 'admin' | passwd --stdin root && \
+    mkdir -p /root/.ssh && chown root.root /root && chmod 700 /root/.ssh && \
     mkdir -p ${APP_HOME} && mkdir -p ${JRE_HOME} && \
-    groupadd -r app && useradd -r -m -g app -d ${APP_HOME} -s /bin/bash app && echo '123456' | passwd --stdin app && \
+    groupadd -r app && useradd -r -m -g app -d ${APP_HOME} -s /bin/bash app && \
     tempuuid=$(cat /proc/sys/kernel/random/uuid) && mkdir -p /tmp/${tempuuid} && \
     wget -c -O /usr/local/bin/gosu --no-cookies --no-check-certificate "${GOSU_URL}" && chmod +x /usr/local/bin/gosu && \
     wget -c -O /tmp/${tempuuid}/myjre.tar.gz --no-cookies --no-check-certificate ${JRE_URL} && \
