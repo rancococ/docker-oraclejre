@@ -12,7 +12,7 @@ ARG UID=8888
 ARG GID=8888
 ARG APP_HOME=/data/app
 ARG JRE_HOME=/data/jre
-ARG GOSU_URL=https://github.com/tianon/gosu/releases/download/1.14/gosu-amd64
+ARG GOSU_URL=https://github.com/tianon/gosu/releases/download/1.17/gosu-amd64
 ARG JRE_URL=https://github.com/rancococ/serverjre/releases/download/server-jre-8/server-jre-8u192-linux-x64.tar.gz
 
 # copy script
@@ -31,7 +31,7 @@ RUN \rm -rf /etc/yum.repos.d/*.repo && \
     rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-${CENTOS_VER} && \
     rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-${CENTOS_VER} && \
     sed -i 's@override_install_langs=en_US.utf8@#override_install_langs=en_US.utf8@g' "/etc/yum.conf" && \
-    yum install -y curl bash bash-completion passwd openssl openssh-server wget net-tools gettext zip unzip ncurses fontconfig && \
+    yum install -y curl bash bash-completion passwd openssl openssh-server wget net-tools gettext zip unzip ncurses fontconfig nfs-utils && \
     yum reinstall -y glibc-common && \
     yum clean all && \rm -rf /var/lib/{cache,log} /var/log/lastlog && \
     ssh-keygen -q -t rsa -b 2048 -f /etc/ssh/ssh_host_rsa_key -N '' && \
